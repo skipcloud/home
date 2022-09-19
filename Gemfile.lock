@@ -10,6 +10,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.0)
+    faraday-retry (2.0.0)
+      faraday (~> 2.0)
     jaro_winkler (1.5.4)
     json (2.6.2)
     kramdown (2.4.0)
@@ -68,7 +70,8 @@ PLATFORMS
 
 DEPENDENCIES
   faraday (~> 2.5)
+  faraday-retry (~> 2.0)
   solargraph (~> 0.46.0)
 
 BUNDLED WITH
-   2.2.15
+   2.3.22
