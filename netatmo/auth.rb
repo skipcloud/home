@@ -32,6 +32,13 @@ module Netatmo
       )
     end
 
+    def refresh_token
+      @conn.post(
+        OAUTH_TOKEN_ENDPOINT,
+        refresh_token_data
+      )
+    end
+
     def request_token_data
       {
         client_id: ENV[CLIENT_ID_ENV_VAR],
@@ -43,9 +50,12 @@ module Netatmo
       }
     end
 
-    def refresh_token
+    def refresh_token_data
       {
-
+        grant_type: 'refresh_token',
+        refresh_token: @refresh_token,
+        client_secret: ENV[CLIENT_SECRET_ENV_VAR],
+        client_id: ENV[CLIENT_ID_ENV_VAR]
       }
     end
   end

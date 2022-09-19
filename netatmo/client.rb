@@ -22,7 +22,8 @@ module Netatmo
     end
 
     def fetch_data
-      puts @access_token
+      resp = @conn.get('/api/getstationsdata', nil, { "Authorization": "Bearer #{@access_token}" })
+      pp resp.body
     end
   end
 end
