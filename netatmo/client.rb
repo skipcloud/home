@@ -18,12 +18,33 @@ module Netatmo
         c.response :json
       end
 
-      authenticate
+      try_request { authenticate }
     end
 
     def fetch_data
-      resp = @conn.get('/api/getstationsdata', nil, { "Authorization": "Bearer #{@access_token}" })
+      resp = try_request do
+        @conn.get(
+          '/api/getstationsdata',
+          nil,
+          { "Authorization": "Bearer #{@access_token}" }
+        )
+      end
       pp resp.body
+    end
+
+    private
+
+    def try_request(&block)
+      throw ArgumentError, 'Block missing' unless block_given?
+      begin
+        block.call
+      rescue Faraday::ClientError => e
+        puts "Ah shit, you've fucked up\n#{e.response_body}"
+      rescue Faraday::ServerError => e
+        puts "Ah shit, the server fucked up\n#{e.response_body}"
+      rescue Faraday::Error => e
+        puts e.response_body
+      end
     end
   end
 end
