@@ -21,15 +21,8 @@ module Netatmo
       try_request { authenticate }
     end
 
-    def fetch_data
-      resp = try_request do
-        @conn.get(
-          '/api/getstationsdata',
-          nil,
-          { "Authorization": "Bearer #{@access_token}" }
-        )
-      end
-      pp resp.body
+    def fetch_stations_data
+      try_request { @conn.get('/api/getstationsdata', nil, headers) }
     end
 
     private
@@ -45,6 +38,10 @@ module Netatmo
       rescue Faraday::Error => e
         puts e.response_body
       end
+    end
+
+    def headers
+      { Authorization: "Bearer #{@access_token}" }
     end
   end
 end

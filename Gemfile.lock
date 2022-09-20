@@ -24,6 +24,10 @@ GEM
     parser (3.1.2.1)
       ast (~> 2.4.1)
     racc (1.6.0)
+    rack (3.0.0)
+    rackup (0.2.2)
+      rack (>= 3.0.0.beta1)
+      webrick
     rainbow (3.1.1)
     regexp_parser (2.5.0)
     reverse_markdown (2.1.1)
@@ -71,6 +75,8 @@ PLATFORMS
 DEPENDENCIES
   faraday (~> 2.5)
   faraday-retry (~> 2.0)
+  rack (~> 3.0)
+  rackup (~> 0.2.2)
   solargraph (~> 0.46.0)
 
 BUNDLED WITH

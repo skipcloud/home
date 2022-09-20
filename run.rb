@@ -1,4 +1,6 @@
-require './netatmo/client'
+# frozen_string_literal: true
+
+require_relative './netatmo/client'
 
 n = Netatmo::Client.new
-n.fetch_data
+pp n.fetch_stations_data
