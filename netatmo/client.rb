@@ -3,6 +3,7 @@
 require_relative './auth'
 require 'faraday'
 require 'faraday/retry'
+require 'hashie'
 
 module Netatmo
   # A Netatmo Client class that can interact with
@@ -22,7 +23,8 @@ module Netatmo
     end
 
     def fetch_stations_data
-      try_request { @conn.get('/api/getstationsdata', nil, headers) }
+      resp = try_request { @conn.get('/api/getstationsdata', nil, headers) }
+      Hashie::Mash.new(resp.body)
     end
 
     private
